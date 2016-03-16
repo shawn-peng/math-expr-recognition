@@ -5,6 +5,7 @@ db:
 opensource:
     inkml2svg: https://github.com/pablospe/inkml2svg
     svg2png: https://www.npmjs.com/package/svg2png
+    mnist_png: https://github.com/myleott/mnist_png
 
 project:
     * write math: http://www.martin-thoma.de/write-math/classify/?formula_id=

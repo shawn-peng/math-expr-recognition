@@ -33,3 +33,5 @@ detexity.json
 data/
 tools/node_modules/
 tools/testdata/
+env/
+test/
