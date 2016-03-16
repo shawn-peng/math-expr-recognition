@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+## custom
+.DS_Store
+detexity.json
+data/
+tools/node_modules/
+tools/testdata/

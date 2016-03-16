@@ -1,0 +1,25 @@
+Project description:
+    
+    We decide to recognize the handwriting math formula and translate it into latex code. The idea came from that we feel  it is difficult to write math formula in latex. If we can write down the formula by hand and translate in to latex code then life will be easier. We find someone have already worked in this area and get very good result. However, most of them are online recognition, we decide to do offline.
+
+Reading list:
+    * On-line Recognition of Handwritten Mathematical Symbols: http://arxiv.org/pdf/1511.09030.pdf
+
+    * Mathematical Expression Recognition based on Probabilistic Grammars
+ : http://hdl.handle.net/10251/51665
+
+Research plan and time-line:
+    * data prepared: 2 week
+    * symbol recognize: 3 week
+    * formula segmentation: 3 week
+    * translate into latex: 1 week
+    * report: 1 week
+
+Plan for data and experiments:
+    evaluate: We may use CHROME(Competition on Recognition of Online Handwritten Mathematical Expressions) data to evaluate our performance.
+    data: We asked Dr. Daniel Kirsch(creator of detexify project) for data, it is around 400,000 handwriting latex symbol image, but it did not include the digits and the letters. We found other database to add more images for the missing part. We may not use all the data of detexify database. 
+
+Anything else we should know about your project?
+    
+
+

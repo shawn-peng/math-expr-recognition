@@ -1,0 +1,21 @@
+db:
+    * http://www.inftyproject.org/en/database.html
+    * english character: http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/EnglishHnd.tgz
+    
+opensource:
+    inkml2svg: https://github.com/pablospe/inkml2svg
+    svg2png: https://www.npmjs.com/package/svg2png
+
+project:
+    * write math: http://www.martin-thoma.de/write-math/classify/?formula_id=
+    * deep learning, handwritten digit: http://neuralnetworksanddeeplearning.com/chap1.html
+paper:
+    * the cmu barchelor's paper: http://arxiv.org/pdf/1511.09030.pdf
+    * 
+
+competition:
+    * http://www.nlpr.ia.ac.cn/icfhr2016/submission.htm
+
+
+any idea:
+    * 
