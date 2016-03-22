@@ -32,19 +32,19 @@ def gen_listfile(name):
 
 if __name__ == "__main__":
     label_dict = gen_listfile("test1")
-    label_dict = gen_listfile("data1")
+    label_dict = gen_listfile("train1")
     with open("label-dict.json", "w") as f:
         json.dump(label_dict, f, indent=4)
 
     data_path = folder_path = os.path.join(cur_path, "test")
     shutil.rmtree(data_path, ignore_errors=True)
-    data_path = folder_path = os.path.join(cur_path, "data")
+    data_path = folder_path = os.path.join(cur_path, "train")
     shutil.rmtree(data_path, ignore_errors=True)
 
-    cmd = 'ci -resize_height 40 -resize_width 40 -encode_type png %s1/ listfile-%s1.txt %s'
+    cmd = 'ci -resize_height 28 -resize_width 28 -encode_type png %s1/ listfile-%s1.txt %s'
     print cmd%(("test",)*3)
     os.system(cmd%(("test",)*3))
-    os.system(cmd%(("data",)*3))
+    os.system(cmd%(("train",)*3))
 
 
 
