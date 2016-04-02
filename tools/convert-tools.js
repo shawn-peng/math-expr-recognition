@@ -36,7 +36,7 @@ var client = request.createClient(host);
 var svg_begin = '<svg style="overflow: hidden; position: relative;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" version="1.1" height="400">'
 var svg_end = '</svg>'
 var path_begin = '<path transform="matrix(1,0,0,1,0,0)" fill="none" stroke="#000" d="'
-var path_end = '" stroke-width="5" stroke-linecap="round"></path>'
+var path_end = '" stroke-width="14" stroke-linecap="round"></path>'
 
 var stroke2path = function(stroke) {
     if(!stroke){return ;}
