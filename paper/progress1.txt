@@ -1,0 +1,40 @@
+
+Project: Offline mathmatical expression recognizer
+------------
+
+Memmber: 
+    
+* Yang Zhang
+* Yisu Peng
+
+DATA:
+
+1. We find three types of data: numbers, English letters and mathmatical symbols.
+    * for numbers, we use mnist data.
+    * for English letters, we find ()
+    * For mathmatical symbols, we use detexify data.
+2. We made serveral scripts to transform detexify data to fit caffe.
+    * convert stroke(svg) to png; we made the stroke bold which turned out a better result
+    * composited the color of the image
+    * resized image to 28x28(this number is taken from mnist)
+    * saved images into lmdb
+
+Deep Leaning Framework:
+
+1. We tried torch, theano and caffe. For torch, both of us were not familiar with Lua so we did not choose it. Theano is written in pure python and focus on fundamental deep learning mathmatic while caffe has higher level of abstraction so we decided to use caffe.
+2. Built up envioronment to run Caffe.
+
+Some Results:
+
+1. We mainly use LeNet to do classification.
+2. We pick 10 symbols from detexify data and so far get 86.77% correct rate.
+3. Before bold the stroke, we can only get around 60% correct rate.
+
+
+
+
+
+
+
+
+
