@@ -1,0 +1,8 @@
+## tools 
+
+config.py: config the path
+convert-tools.js: convert couchdb image data to svg
+
+listfile.py: generate the listfile for caffe
+gen_image_data.py: use the list file to gen the image data(leveldb)
+
