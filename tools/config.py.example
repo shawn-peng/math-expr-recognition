@@ -14,4 +14,5 @@ IMAGE_TRAIN_DATA_PATH = PROJECT_ROOT + "data/train"
 CAFEE_ROOT = "/home/yang/workspace/caffe/"
 CONVERT_IMAGESET = CAFEE_ROOT + "build/tools/convert_imageset"
 
-
+LENET_TRAIN_PROTOTXT = PROJECT_ROOT + "lenet/lenet_auto_train.prototxt"
+LENET_TEST_PROTOTXT = PROJECT_ROOT + "lenet/lenet_auto_test.prototxt"
