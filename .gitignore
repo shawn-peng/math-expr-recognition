@@ -35,5 +35,5 @@ tools/node_modules/
 tools/testdata/
 env/
 test/
-
+tools/config.py
 
