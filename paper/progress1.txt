@@ -10,14 +10,17 @@ Memmber:
 DATA:
 
 1. We find three types of data: numbers, English letters and mathmatical symbols.
-    * for numbers, we use mnist data.
-    * for English letters, we find ()
-    * For mathmatical symbols, we use detexify data.
-2. We made serveral scripts to transform detexify data to fit caffe.
-    * convert stroke(svg) to png; we made the stroke bold which turned out a better result
-    * composited the color of the image
-    * resized image to 28x28(this number is taken from mnist)
-    * saved images into lmdb
+    * for numbers, we use mnist data:
+        * Mnist data can be download directly from the website without polishing too much.
+    * for English letters, we find Chars74K(English Hand writting) data:
+        * We have not work on this data yet.
+    * For mathmatical symbols, we use detexify data:
+        * We made serveral scripts to transform detexify data to fit caffe.
+        * convert stroke(svg) to png; we made the stroke bold which turned out a better result
+        * composited the color of the image
+        * resized image to 28x28 (this number is taken from mnist)
+        * saved images into lmdb
+
 
 Deep Leaning Framework:
 
@@ -30,7 +33,10 @@ Some Results:
 2. We pick 10 symbols from detexify data and so far get 86.77% correct rate.
 3. Before bold the stroke, we can only get around 60% correct rate.
 
-
+Future Planing:
+1. Try to segmentation (split the math formula, maybe have not time for this one, we may focus on neural network)
+2. Try to extend the number of classes to 100+
+3. Analyse caffe lmdb database datastruct because we need to add our data to it
 
 
 
