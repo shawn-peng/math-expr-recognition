@@ -27,11 +27,14 @@ Deep Leaning Framework:
 1. We tried torch, theano and caffe. For torch, both of us were not familiar with Lua so we did not choose it. Theano is written in pure python and focus on fundamental deep learning mathmatic while caffe has higher level of abstraction so we decided to use caffe.
 2. Built up envioronment to run Caffe.
 
-Some Results:
 
-1. We mainly use LeNet to do classification.
-2. We pick 10 symbols from detexify data and so far get 86.77% correct rate.
-3. Before bold the stroke, we can only get around 60% correct rate.
+Experiments:
+
+The first thing we tried is to use original LeNet to do classification on a subset of math symbols (we picked 10 symbols from detexify data). We got very low accuracy, less than random guess. We figured out the problem is that the learning rate is too high that caused the training to be diverge. After we decreased the step size to 0.001, we get about 50% percent accuracy, but it's still not plausible enough.
+
+Then we tried to composite the color from white background to black background. We do this because we found that lenet is using this format. We believe this may improve the computational efficiency. We get only little improvement.
+
+The major change we did was to bold the stroke when generating the image from stroke trail data to image, we got 86.77% correct rate.
 
 Future Planing:
 1. Try to segmentation (split the math formula, maybe have not time for this one, we may focus on neural network)
