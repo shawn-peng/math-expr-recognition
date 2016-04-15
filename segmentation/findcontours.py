@@ -9,7 +9,7 @@ img = cv2.imread('../formula/test.png')
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 thresh = cv2.adaptiveThreshold(gray,255,1,1,11,2)
-
+# thresh = 100
 thresh_color = cv2.cvtColor(thresh,cv2.COLOR_GRAY2BGR)
 # apply some dilation and erosion to join the gaps
 thresh = cv2.dilate(thresh,None,iterations = 1)
@@ -20,6 +20,8 @@ for cnt in contours:
     cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
     cv2.rectangle(thresh_color,(x,y),(x+w,y+h),(0,255,0),2)
 
+cv2.namedWindow("img", cv2.WINDOW_NORMAL)
+cv2.namedWindow("res", cv2.WINDOW_NORMAL)
 cv2.imshow('img',img)
 cv2.imshow('res',thresh_color)
 
