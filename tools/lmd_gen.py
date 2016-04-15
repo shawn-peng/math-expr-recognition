@@ -44,16 +44,13 @@ label_dict = dict(zip(label_array, range(len(label_array))))
 
 env = lmdb.open('test', map_size=map_size)
 
+
+## https://github.com/BVLC/caffe/issues/1698#issuecomment-70211045
 with env.begin(write=True) as txn:
     # txn is a Transaction object
     i = 0
     for label in data_dict:
         for X in data_dict[label]:
-            datum = caffe.proto.caffe_pb2.Datum()
-            datum.channels = 1
-            datum.height = X.shape[0]
-            datum.width = X.shape[1]
-            datum.data = X.tobytes()  # or .tostring() if numpy < 1.9
             datum.label = label_dict[label]
             str_id = '{:08}'.format(i)
             i += 1
