@@ -68,10 +68,6 @@ dict segment(const string &filename, float sigma, float c, int min_size)
 		for (int j = 0; j < img.rows; j++)
 		{
 			int id = u->find(i*img.rows + j);
-			//list p(forests[id]);
-			//p.insert(0, make_tuple(i, j));
-			cout << id << endl;
-			//forests[id] = p;
 			if (!forests.has_key(id))
 			{
 				forests[id] = list();
