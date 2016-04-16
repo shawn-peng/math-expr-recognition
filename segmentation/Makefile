@@ -13,3 +13,7 @@ egbis/libegbis.so:
 clean:
 	rm -f *.o hello.so
 	make -C egbis/
+
+remake:
+	make clean && make
+

@@ -57,17 +57,11 @@ dict segment(const string &filename, float sigma, float c, int min_size)
 
 	dict forests;
 
-	//for (int i = 0; i < num_ccs; i++)
-	//{
-	//	forests.append(list());
-	//}
-	cout << len(forests) << endl;
-
 	for (int i = 0; i < img.rows; i++)
 	{
-		for (int j = 0; j < img.rows; j++)
+		for (int j = 0; j < img.cols; j++)
 		{
-			int id = u->find(i*img.rows + j);
+			int id = u->find(i*img.cols + j);
 			if (!forests.has_key(id))
 			{
 				forests[id] = list();
