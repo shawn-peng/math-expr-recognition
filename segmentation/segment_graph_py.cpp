@@ -73,7 +73,7 @@ dict segment(const string &filename, float sigma, float c, int min_size)
 				forests[id] = list();
 			}
 			list tmp;
-			tmp.append(make_tuple(i, j));
+			tmp.append(make_tuple(j, i));
 			forests[id] += tmp;
 		}
 	}
