@@ -1,6 +1,4 @@
 
-
-
 PROJECT_ROOT = "/home/yang/workspace/grad/zhang505-yisupeng-final/"
 
 IMAGE_TEST = PROJECT_ROOT + "image/test1/"
@@ -14,5 +12,9 @@ IMAGE_TRAIN_DATA_PATH = PROJECT_ROOT + "data/train"
 CAFEE_ROOT = "/home/yang/workspace/caffe/"
 CONVERT_IMAGESET = CAFEE_ROOT + "build/tools/convert_imageset"
 
-LENET_TRAIN_PROTOTXT = PROJECT_ROOT + "lenet/lenet_auto_train.prototxt"
-LENET_TEST_PROTOTXT = PROJECT_ROOT + "lenet/lenet_auto_test.prototxt"
+''' used in classify.py '''
+LENET_PROTOTXT = PROJECT_ROOT + "lenet/yang-python-solver.prototxt"
+
+WEIGHTS = PROJECT_ROOT + "snapshot/_iter_30000.caffemodel"
+LABEL_DICT = PROJECT_ROOT + "lenet/label-dict.json"
+
