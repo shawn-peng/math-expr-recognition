@@ -20,7 +20,7 @@ def most_common(lst):
 
 def classify(pil_image, list_dict=LABEL_DICT):
     weights = WEIGHTS
-    net = caffe.Net(PROJECT_ROOT + "lenet/yang_python_test.prototxt",
+    net = caffe.Net(LENET_PROTOTXT,
                     weights,
                     caffe.TEST)
 
@@ -29,7 +29,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
     # transformer.set_transpose('data', (2, 0,1))
     # transformer.set_channel_swap('data', (2,1,0))
     transformer.set_raw_scale('data', 255.0)
-    net.blobs['data'].reshape(1,3,28,28)
+    net.blobs['data'].reshape(1,1,28,28)
 
 
     # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 
     import os
-    folder = PROJECT_ROOT + 'image/train1/latex2e-OT1-_zeta/'
+    folder = PROJECT_ROOT + 'data/sym10/test1/latex2e-OT1-_zeta/'
     total = 0
     for image in os.listdir(folder):
         total += 1
