@@ -7,9 +7,9 @@ import caffe ;caffe.set_mode_gpu();caffe.set_device(0);
 from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
+np.set_printoptions(threshold=np.nan)
 
 
-import numpy as np
 
 from segmentation import extract
 from tools.config import *
@@ -38,6 +38,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
     # im.show()
     # print im.size
     im = np.array(im)
+    # print im
 
 
 
@@ -75,7 +76,7 @@ if __name__ == "__main__":
 
 
     import os
-    folder = PROJECT_ROOT + 'data/sym10/test1/latex2e-OT1-_zeta/'
+    folder = PROJECT_ROOT + 'image/test1/latex2e-OT1-_zeta/'
     total = 0
     for image in os.listdir(folder):
         total += 1

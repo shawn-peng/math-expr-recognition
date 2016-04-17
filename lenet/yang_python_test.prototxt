@@ -7,7 +7,7 @@ layer {
     scale: 0.00390625
   }
 
-  input_param { shape: { dim: 100 dim: 3 dim: 28 dim: 28 } }
+  input_param { shape: { dim: 100 dim: 1 dim: 28 dim: 28 } }
 
 }
 layer {
