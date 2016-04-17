@@ -11,13 +11,14 @@ import numpy as np
 
 import numpy as np
 
+from segmentation import extract
 from tools.config import *
 
 
 def most_common(lst):
     return max(set(lst), key=lst.count)
 
-def classify(image_path, list_dict=LABEL_DICT):
+def classify(pil_image, list_dict=LABEL_DICT):
     weights = WEIGHTS
     net = caffe.Net(PROJECT_ROOT + "lenet/yang_python_test.prototxt",
                     weights,
@@ -32,8 +33,10 @@ def classify(image_path, list_dict=LABEL_DICT):
 
 
     # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
-    im = Image.open(image_path)
-    im.thumbnail((28, 28), Image.ANTIALIAS)
+    im = pil_image
+    im = im.resize((28, 28), Image.ANTIALIAS)
+    im.show()
+    # print im.size
     im = np.array(im)
 
 
@@ -41,7 +44,7 @@ def classify(image_path, list_dict=LABEL_DICT):
     net.blobs['data'].data[...] = transformer.preprocess('data', im)
     #compute
     out = net.forward()
-    # print out['prob']
+    print out['prob']
     index = most_common([x.argmax() for x in out['prob']])
     predict = None
     f = open(list_dict)
@@ -51,7 +54,20 @@ def classify(image_path, list_dict=LABEL_DICT):
     f.close()
     return predict
 
+
+def fomula_decoder(image_path, list_dict=LABEL_DICT):
+    print "==================== start ==================="
+    pil_list = extract(image_path)
+    result = []
+    for pil_image in pil_list:
+        # print pil_image.size
+        predict = classify(pil_image)
+        result.append(predict)
+    return result
+
 if __name__ == "__main__":
-    image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
-    predict = classify(image_path)
-    print predict
+    # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
+    # predict = classify(image_path)
+    # print predict
+    result = fomula_decoder("formula/zeta.png")
+    print result
