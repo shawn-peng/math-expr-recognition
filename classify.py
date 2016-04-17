@@ -26,7 +26,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
 
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
     # transformer.set_mean('data', np.load('python/caffe/imagenet/ilsvrc_2012_mean.npy').mean(1).mean(1))
-    # transformer.set_transpose('data', (2,0,1))
+    # transformer.set_transpose('data', (2, 0,1))
     # transformer.set_channel_swap('data', (2,1,0))
     transformer.set_raw_scale('data', 255.0)
     net.blobs['data'].reshape(1,3,28,28)
@@ -35,7 +35,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
     # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
     im = pil_image
     im = im.resize((28, 28), Image.ANTIALIAS)
-    im.show()
+    # im.show()
     # print im.size
     im = np.array(im)
 
@@ -44,7 +44,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
     net.blobs['data'].data[...] = transformer.preprocess('data', im)
     #compute
     out = net.forward()
-    print out['prob']
+    # print out
     index = most_common([x.argmax() for x in out['prob']])
     predict = None
     f = open(list_dict)
@@ -66,8 +66,22 @@ def fomula_decoder(image_path, list_dict=LABEL_DICT):
     return result
 
 if __name__ == "__main__":
-    # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
-    # predict = classify(image_path)
+    # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/183.png'
+    # pil_image = Image.open(image_path)
+    # predict = classify(pil_image)
     # print predict
-    result = fomula_decoder("formula/zeta.png")
-    print result
+    # result = fomula_decoder("formula/zeta.png")
+    # print result
+
+
+    import os
+    folder = PROJECT_ROOT + 'image/train1/latex2e-OT1-_zeta/'
+    total = 0
+    for image in os.listdir(folder):
+        total += 1
+        pil_image = Image.open(folder + image)
+        predict = classify(pil_image)
+        print predict
+
+    print total
+

@@ -25,14 +25,15 @@ def average_color(pil_image, datalist):
     # y = np.asarray(pil_image.getdata(),dtype=np.float64).transpose();
     # return np.average(y)
 
-def extract(image_name="../formula/euler.png"):
+def extract(image_name="../formula/zeta.png"):
     # pp.pprint(segment(image_name, 1, 500, 200))
     datalist = segment(image_name, 0.114, 300, 200).values()
     # print datalist
     original_image = Image.open(image_name)
-    print original_image
-    pp.pprint(datalist)
+    # print original_image
+    # pp.pprint(datalist)
     i = 0
+    result = []
     for pointlist in datalist:
         max_x = max(pointlist, key=itemgetter(0))[0]
         max_y = max(pointlist, key=itemgetter(1))[1]
@@ -40,25 +41,27 @@ def extract(image_name="../formula/euler.png"):
         min_y = min(pointlist, key=itemgetter(1))[1]
         width = max_x - min_x
         height = max_y - min_y
-        print "=========================="
-        print "i :%s"%i
-        print "max_x :%s"%max_x
-        print "min_x :%s"%min_x
-        print "max_y :%s"%max_y
-        print "min_y :%s"%min_y
-        print "width :%s"%width
-        print "height :%s"%height
-        print "=========================="
+        # print "=========================="
+        # print "i :%s"%i
+        # print "max_x :%s"%max_x
+        # print "min_x :%s"%min_x
+        # print "max_y :%s"%max_y
+        # print "min_y :%s"%min_y
+        # print "width :%s"%width
+        # print "height :%s"%height
+        # print "=========================="
 
         # yourImage.crop((0, 30, w, h-30)).save(...)
         temp_img = original_image.crop((min_x, min_y, max_x, max_y))
-        print "average_color(original_image, pointlist):%s"%average_color(original_image, pointlist)
+        # print "average_color(original_image, pointlist):%s"%average_color(original_image, pointlist)
         if(average_color(original_image, pointlist) < 100):
             continue
-        temp_img.show()
+        # temp_img.show()
         i += 1
-        # input()
-        # some process
+
+        result.append(temp_img)
+
+    return result
 
 if __name__ == "__main__":
     # dome some test here 

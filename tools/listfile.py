@@ -33,7 +33,7 @@ def gen_listfile(name, image_path=None):
 if __name__ == "__main__":
     label_dict = gen_listfile(LISTFILE_TEST, IMAGE_TEST)
     label_dict = gen_listfile(LISTFILE_TRAIN, IMAGE_TRAIN)
-    with open("label-dict.json", "w") as f:
+    with open(LABEL_DICT, "w") as f:
         json.dump(label_dict, f, indent=4)
 
 
