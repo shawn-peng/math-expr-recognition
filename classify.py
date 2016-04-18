@@ -18,7 +18,7 @@ from tools.config import *
 def most_common(lst):
     return max(set(lst), key=lst.count)
 
-def classify(image_path, list_dict=LABEL_DICT):
+def classify(pil_image, list_dict=LABEL_DICT):
     weights = WEIGHTS
     net = caffe.Net(LENET_PROTOTXT,
                     weights,
@@ -26,29 +26,21 @@ def classify(image_path, list_dict=LABEL_DICT):
 
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
     # transformer.set_mean('data', np.load('python/caffe/imagenet/ilsvrc_2012_mean.npy').mean(1).mean(1))
-    transformer.set_transpose('data', (2,0,1))
+    # transformer.set_transpose('data', (2,0,1))
     # transformer.set_channel_swap('data', (2,1,0))
-    transformer.set_raw_scale('data', 1.0)
+    transformer.set_raw_scale('data', 1/255.0)
     net.blobs['data'].reshape(1,1,28,28)
 
 
     # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
-    # im = pil_image
-    # im = im.resize((28, 28), Image.ANTIALIAS)
-    # im.show()
-    # print im.size
-    im = caffe.io.load_image(image_path, color=False)
-
-    # im = np.array(im)
-
-    print im.shape
-
-
+    im = pil_image
+    im = im.resize((28, 28), Image.ANTIALIAS)
+    im = np.array(im)
 
     net.blobs['data'].data[...] = transformer.preprocess('data', im)
     #compute
     out = net.forward()
-    print out
+    # print out
     index = most_common([x.argmax() for x in out['prob']])
     predict = None
     f = open(list_dict)
@@ -60,7 +52,7 @@ def classify(image_path, list_dict=LABEL_DICT):
 
 
 def fomula_decoder(image_path, list_dict=LABEL_DICT):
-    print "==================== start ==================="
+    # print "==================== start ==================="
     pil_list = extract(image_path)
     result = []
     for pil_image in pil_list:
@@ -74,19 +66,19 @@ if __name__ == "__main__":
     # pil_image = Image.open(image_path)
     # predict = classify(pil_image)
     # print predict
-    # result = fomula_decoder("formula/zeta.png")
-    # print result
+    result = fomula_decoder("formula/gamma.png")
+    print result
 
 
-    import os
-    folder = PROJECT_ROOT + 'imagegray/test1/latex2e-OT1-_zeta/'
-    total = 0
-    for image in os.listdir(folder):
-        total += 1
-        # pil_image = Image.open(folder + image)
-        predict = classify(folder + image)
-        ## pil_image.convert('L')
-        print predict
+    # import os
+    # folder = PROJECT_ROOT + 'imagegray/test1/latex2e-OT1-_epsilon/'
+    # total = 0
+    # for image in os.listdir(folder):
+    #     total += 1
+    #     pil_image = Image.open(folder + image)
+    #     predict = classify(pil_image)
+    #     ## pil_image.convert('L')
+    #     print predict
 
-    print total
+    # print total
 
