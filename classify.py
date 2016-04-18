@@ -4,7 +4,7 @@
 
 import json
 import caffe ;caffe.set_mode_gpu();caffe.set_device(0);
-from PIL import Image
+from PIL import Image, ImageOps
 import matplotlib.pyplot as plt
 import numpy as np
 np.set_printoptions(threshold=np.nan)
@@ -34,6 +34,14 @@ def classify(pil_image, list_dict=LABEL_DICT):
 
     # image_path = PROJECT_ROOT + 'image/test1/latex2e-OT1-_Sigma/10.png'
     im = pil_image
+    old_size = im.size
+    new_size = (old_size[0]+30, old_size[1]+30)
+    new_im = Image.new("L", new_size)   ## luckily, this is already black!
+    new_im.paste(im, ((new_size[0]-old_size[0])/2,
+                      (new_size[1]-old_size[1])/2))
+
+    new_im.show()
+    im = new_im
     im = im.resize((28, 28), Image.ANTIALIAS)
     im = np.array(im)
 
