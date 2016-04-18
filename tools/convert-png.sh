@@ -17,7 +17,7 @@ for file in $list;
 do
 	echo $file;
 	pngfile=${file/svgdata/data}
-	pngfile=${pngfile/\.svg/data}
+	pngfile=${pngfile/\.svg/.png}
 	convert -type Grayscale -negate $file $pngfile
 	#echo $file ${file/svg/png};
 done
