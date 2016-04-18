@@ -12,6 +12,7 @@ from segmentation import extract
 from tools.config import *
 
 
+
 def most_common(lst):
     return max(set(lst), key=lst.count)
 
@@ -33,7 +34,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
     new_im.paste(im, ((new_size[0]-old_size[0])/2,
                       (new_size[1]-old_size[1])/2))
 
-    new_im.show()
+    # new_im.show()
     im = new_im
     im = im.resize((28, 28), Image.ANTIALIAS)
     im = np.array(im)
@@ -47,20 +48,19 @@ def classify(pil_image, list_dict=LABEL_DICT):
     f = open(list_dict)
     data = json.load(f)
     data = dict((v,k) for k,v in data.iteritems())
+    print data
     predict = data[index]
     f.close()
     return predict
 
 def fomula_decoder(image_path, list_dict=LABEL_DICT):
-    # print "==================== start ==================="
-    pil_list = extract(image_path)
-    result = []
-    for pil_image in pil_list:
-        # print pil_image.size
-        predict = classify(pil_image)
-        result.append(predict)
-    return result
+    image_symbol_list = extract(image_path)
+    for img_sym in image_symbol_list:
+        img_sym.predict = classify(img_sym.pil_image)
+        print img_sym.predict
+    return image_symbol_list
 
 if __name__ == "__main__":
-    result = fomula_decoder("formula/gamma.png")
-    print result
+    results = fomula_decoder("formula/gamma.png")
+    for result in results:
+        print result
