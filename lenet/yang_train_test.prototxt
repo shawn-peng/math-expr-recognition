@@ -29,7 +29,7 @@ layer {
   }
   data_param {
     source: "/home/yang/workspace/grad/zhang505-yisupeng-final/data/test"
-    batch_size: 100
+    batch_size: 1000
     backend: LMDB
   }
 }
@@ -140,7 +140,7 @@ layer {
     lr_mult: 2
   }
   inner_product_param {
-    num_output: 20
+    num_output: 101
     weight_filler {
       type: "xavier"
     }
