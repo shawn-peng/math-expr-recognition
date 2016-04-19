@@ -39,3 +39,4 @@ tools/config.py
 tools/config.pyc
 
 *pyc
+snapshot/
