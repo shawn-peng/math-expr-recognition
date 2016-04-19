@@ -2,6 +2,7 @@ import os
 import random
 import shutil
 
+import numpy as np
 
 cur_path = os.getcwd()
 
@@ -16,7 +17,14 @@ for folder in os.listdir(data_path):
         continue
 
     files = os.listdir(data_folder)
-    random.shuffle(files)
+    # random.shuffle(files)
+
+    n = 1000
+    flen = len(files);
+    all_ind = np.random.randint(0,flen,n)
+    print(files[all_ind])
+    exit()
+
 
     test_folder = test_path + "/" + folder
     train_folder = train_path + "/" + folder
