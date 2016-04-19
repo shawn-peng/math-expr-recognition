@@ -11,5 +11,5 @@ Main chain:
 * gen_image_data.py: use the list file to gen the image data(lmdb)
 
 Helper tools:
-file-pickup.py: pick up some images to another folder
+image-sample.py: pick up some images to another folder
 
