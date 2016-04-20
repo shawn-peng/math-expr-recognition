@@ -72,6 +72,20 @@ def fomula_decoder(image_path, list_dict=LABEL_DICT):
     return image_symbol_list
 
 if __name__ == "__main__":
-    results = fomula_decoder("formula/a+b.png")
-    for result in results:
-        print result
+    # results = fomula_decoder("formula/A-L.png")
+    # results.sort(key=lambda x: x.left)
+    # for result in results:
+    #     print result
+
+    import os
+    folder = PROJECT_ROOT + 'tools/test/Lambda/'
+    total = 0
+    for image in os.listdir(folder):
+        total += 1
+        pil_image = Image.open(folder + image)
+        predict = classify(pil_image)
+        ## pil_image.convert('L')
+        print predict
+
+    print total
+

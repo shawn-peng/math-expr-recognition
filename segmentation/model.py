@@ -15,6 +15,7 @@ class ImageSymbol(object):
         self.center = ((left+right)/2., (top+right)/2.)
 
     def __str__(self):
-        return "%s: %s"%(self.name, self.predict)
+        position = "position: x -> %s"%self.left
+        return "%s: %s | %s"%(self.name, self.predict, position)
 
     
