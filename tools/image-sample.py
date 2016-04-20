@@ -2,7 +2,7 @@ import os
 import random
 import shutil
 
-import numpy as np
+# import numpy as np
 
 cur_path = os.getcwd()
 
@@ -20,10 +20,10 @@ for folder in os.listdir(data_path):
     # random.shuffle(files)
 
     n = 1000
-    flen = len(files);
-    all_ind = np.random.randint(0,flen,n)
-    print(files[all_ind])
-    exit()
+    flen = len(files)
+    print "flen: %s"%flen
+    # print(files[all_ind])
+    # exit()
 
 
     test_folder = test_path + "/" + folder
@@ -36,19 +36,22 @@ for folder in os.listdir(data_path):
     if not os.path.isdir(train_folder):
         os.makedirs(train_folder)
 
-
-    for test_file in files[:len(files)/10]:
-        _file = test_folder + "/" + test_file
+    for i in range(n/10):
+        t = random.randint(0,flen-1)
+        # print "test t: %s"%t
+        _file = test_folder + "/" + str(i) + "_" + files[t]
         if os.path.isfile(_file):
             continue
-        shutil.copyfile(data_folder + "/" + test_file, 
+        shutil.copyfile(data_folder + "/" + files[t], 
                         _file)
 
-    for train_file in files[len(files)/10:]:
-        _file = train_folder + "/" + train_file
+    for i in range(n):
+        t = random.randint(0,flen-1)
+        # print "train t: %s"%t
+        _file = train_folder + "/" + str(i) + "_" + files[t]
         if os.path.isfile(_file):
             continue
-        shutil.copyfile(data_folder + "/" + train_file, 
+        shutil.copyfile(data_folder + "/" + files[t], 
                         _file)
 
 

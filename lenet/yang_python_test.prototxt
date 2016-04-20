@@ -1,37 +1,14 @@
 name: "LeNet"
 layer {
-  name: "mnist"
-  type: "Data"
+  name: "data"
+  type: "Input"
   top: "data"
-  top: "label"
-  include {
-    phase: TRAIN
-  }
   transform_param {
     scale: 0.00390625
   }
-  data_param {
-    source: "/home/yang/workspace/grad/zhang505-yisupeng-final/data/train"
-    batch_size: 64
-    backend: LMDB
-  }
-}
-layer {
-  name: "mnist"
-  type: "Data"
-  top: "data"
-  top: "label"
-  include {
-    phase: TEST
-  }
-  transform_param {
-    scale: 0.00390625
-  }
-  data_param {
-    source: "/home/yang/workspace/grad/zhang505-yisupeng-final/data/test"
-    batch_size: 1000
-    backend: LMDB
-  }
+
+  input_param { shape: { dim: 100 dim: 1 dim: 28 dim: 28 } }
+
 }
 layer {
   name: "conv1"
@@ -149,20 +126,10 @@ layer {
     }
   }
 }
+
 layer {
-  name: "accuracy"
-  type: "Accuracy"
+  name: "prob"
+  type: "Softmax"
   bottom: "ip2"
-  bottom: "label"
-  top: "accuracy"
-  include {
-    phase: TEST
-  }
-}
-layer {
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "ip2"
-  bottom: "label"
-  top: "loss"
+  top: "prob"
 }

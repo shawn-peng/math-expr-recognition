@@ -1,8 +1,15 @@
 ## tools 
 
-config.py: config the path
-convert-tools.js: convert couchdb image data to svg
+Main chain:
+* config.py: config the path
+* get-svg.sh: a shotcut for convert-tools.js, this will use symlist file
+    * symlist: symbol you wish to detect,latex code
+    * convert-tools.js: convert couchdb image data to svg
+    * rename data to svgdata
 
-listfile.py: generate the listfile for caffe
-gen_image_data.py: use the list file to gen the image data(leveldb)
-gen_prototxt.py: generate prototxt file, need caffe python binding
+* listfile.py: generate the listfile for caffe
+* gen_image_data.py: use the list file to gen the image data(lmdb)
+
+Helper tools:
+image-sample.py: pick up some images to another folder
+
