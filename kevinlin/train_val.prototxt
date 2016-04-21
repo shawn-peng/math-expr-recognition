@@ -7,12 +7,12 @@ layers {
   data_param {
     source: "/home/yang/workspace/grad/zhang505-yisupeng-final/data/train"
     backend: LMDB
-    batch_size: 64
+    batch_size: 128
   }
   transform_param {
     crop_size: 227
     mean_file: "/home/yang/workspace/grad/zhang505-yisupeng-final/kevinlin/imagenet_mean.binaryproto"
-    mirror: true
+    mirror: false
   }
   include: { phase: TRAIN }
 }
@@ -38,8 +38,8 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0.01
+  blobs_lr: 0.02
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -89,8 +89,8 @@ layers {
   type: CONVOLUTION
   bottom: "pool1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0.01
+  blobs_lr: 0.02
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -141,8 +141,8 @@ layers {
   type: CONVOLUTION
   bottom: "pool2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0.01
+  blobs_lr: 0.02
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -170,8 +170,8 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0.01
+  blobs_lr: 0.02
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -200,8 +200,8 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0.01
+  blobs_lr: 0.02
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -330,9 +330,30 @@ layers {
   }
 }
 layers {
+  name: "fc9"
+  type: INNER_PRODUCT
+  bottom: "fc7"
+  top: "fc9"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
+    num_output: 101
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
   name: "accuracy"
   type: ACCURACY
-  bottom: "fc8"
+  bottom: "fc9"
   bottom: "label"
   top: "accuracy"
   include: { phase: TEST }
@@ -340,7 +361,14 @@ layers {
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc8"
+  bottom: "fc9"
   bottom: "label"
   top: "loss"
+}
+layers {
+  name: "mockloss"
+  type: SOFTMAX_LOSS
+  bottom: "fc8"
+  bottom: "label"
+  top: "mockloss"
 }
