@@ -31,10 +31,14 @@ def classify(pil_image, list_dict=LABEL_DICT):
     im = pil_image
     ## http://stackoverflow.com/a/11143078
     old_size = im.size
-    new_size = (old_size[0]+30, old_size[1]+30)
+
+    a = max(old_size)
+    new_size = (a+30, a+30)
+
     new_im = Image.new("L", new_size)   ## luckily, this is already black!
     new_im.paste(im, ((new_size[0]-old_size[0])/2,
                       (new_size[1]-old_size[1])/2))
+    new_im.show()
 
     new_im = ndimage.grey_dilation(new_im, size=(2,2))
     # print new_im
@@ -47,7 +51,7 @@ def classify(pil_image, list_dict=LABEL_DICT):
     im = new_im
     im = misc.imresize(im, size=(28, 28))
     # im = im.resize((28, 28), Image.ANTIALIAS)
-    # misc.imsave(str(random.randint(1,20))+"test.png", im)
+    misc.imsave(str(random.randint(1,20))+"test.png", im)
     im = np.array(im)
 
     net.blobs['data'].data[...] = transformer.preprocess('data', im)
@@ -72,20 +76,20 @@ def fomula_decoder(image_path, list_dict=LABEL_DICT):
     return image_symbol_list
 
 if __name__ == "__main__":
-    # results = fomula_decoder("formula/A-L.png")
-    # results.sort(key=lambda x: x.left)
-    # for result in results:
-    #     print result
+    results = fomula_decoder("formula/417.png")
+    results.sort(key=lambda x: x.left)
+    for result in results:
+        print result
 
-    import os
-    folder = PROJECT_ROOT + 'tools/test/Lambda/'
-    total = 0
-    for image in os.listdir(folder):
-        total += 1
-        pil_image = Image.open(folder + image)
-        predict = classify(pil_image)
-        ## pil_image.convert('L')
-        print predict
+    # import os
+    # folder = PROJECT_ROOT + 'tools/test/Lambda/'
+    # total = 0
+    # for image in os.listdir(folder):
+    #     total += 1
+    #     pil_image = Image.open(folder + image)
+    #     predict = classify(pil_image)
+    #     ## pil_image.convert('L')
+    #     print predict
 
-    print total
+    # print total
 
