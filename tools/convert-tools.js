@@ -1,3 +1,4 @@
+//!/usr/bin/node
 /**
 
 use to convert detexify data to png
@@ -30,7 +31,7 @@ if (process.argv.length >= 3){
 
 var folder_path = "./data/" + key + "/"
 var host = "http://127.0.0.1:5984/"
-var database = "detexity"
+var database = "b657"
 var url = database + "/_design/tools/_view/by_id?key=%22" + key + "%22&reduce=false&include_docs=true"
 var client = request.createClient(host);
 var svg_begin = '<svg style="overflow: hidden; position: relative;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" version="1.1" height="400">'

@@ -15,9 +15,9 @@ list=`find svgdata -name "*.svg"`
 
 for file in $list;
 do
-	echo $file;
 	pngfile=${file/svgdata/data}
 	pngfile=${pngfile/\.svg/.png}
+	echo "$file => $pngfile";
 	convert -type Grayscale -negate $file $pngfile
 	#echo $file ${file/svg/png};
 done

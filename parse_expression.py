@@ -14,6 +14,27 @@ from segmentation import extract
 from tools.config import *
 
 
+def vis_square(data):
+    """Take an array of shape (n, height, width) or (n, height, width, 3)
+       and visualize each (height, width) thing in a grid of size approx. sqrt(n) by sqrt(n)"""
+
+    # normalize data for display
+    data = (data - data.min()) / (data.max() - data.min())
+
+    # force the number of filters to be square
+    n = int(np.ceil(np.sqrt(data.shape[0])))
+    padding = (((0, n ** 2 - data.shape[0]),
+    (0, 1), (0, 1))                 # add some space between filters
+    + ((0, 0),) * (data.ndim - 3))  # don't pad the last dimension (if there is one)
+    data = np.pad(data, padding, mode='constant', constant_values=1)  # pad with ones (white)
+
+    # tile the filters into an image
+    data = data.reshape((n, n) + data.shape[1:]).transpose((0, 2, 1, 3) + tuple(range(4, data.ndim + 1)))
+    data = data.reshape((n * data.shape[1], n * data.shape[3]) + data.shape[4:])
+
+    #print(data.shape)
+    plt.imshow(data); plt.axis('off')
+
 
 def most_common(lst):
     return max(set(lst), key=lst.count)
@@ -27,6 +48,10 @@ def classify(pil_image, list_dict=LABEL_DICT):
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
     transformer.set_raw_scale('data', 1/255.0)
     net.blobs['data'].reshape(1,1,28,28)
+
+    filters = net.params['conv1'][0].data
+    vis_square(filters.transpose(0, 2, 3, 1))
+
 
     im = pil_image
     ## http://stackoverflow.com/a/11143078
@@ -76,7 +101,7 @@ def fomula_decoder(image_path, list_dict=LABEL_DICT):
     return image_symbol_list
 
 if __name__ == "__main__":
-    results = fomula_decoder("formula/417.png")
+    results = fomula_decoder("./formula/gamma.png")
     results.sort(key=lambda x: x.left)
     for result in results:
         print result

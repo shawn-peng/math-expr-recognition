@@ -36,6 +36,7 @@ for folder in os.listdir(data_path):
     if not os.path.isdir(train_folder):
         os.makedirs(train_folder)
 
+	print n/10
     for i in range(n/10):
         t = random.randint(0,flen-1)
         # print "test t: %s"%t

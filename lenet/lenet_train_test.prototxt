@@ -11,7 +11,7 @@ layer {
     scale: 0.00390625
   }
   data_param {
-    source: "/home/shawn/workspace/b657/final/data/sym10/train"
+    source: "/home/shawn/workspace/b657/final/data/all/train"
     batch_size: 64
     backend: LMDB
   }
@@ -28,7 +28,7 @@ layer {
     scale: 0.00390625
   }
   data_param {
-    source: "/home/shawn/workspace/b657/final/data/sym10/test"
+    source: "/home/shawn/workspace/b657/final/data/all/test"
     batch_size: 100
     backend: LMDB
   }
@@ -140,7 +140,7 @@ layer {
     lr_mult: 2
   }
   inner_product_param {
-    num_output: 10
+    num_output: 9
     weight_filler {
       type: "xavier"
     }

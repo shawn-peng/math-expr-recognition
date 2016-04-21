@@ -5,7 +5,8 @@ Main chain:
 * get-svg.sh: a shotcut for convert-tools.js, this will use symlist file
     * symlist: symbol you wish to detect,latex code
     * convert-tools.js: convert couchdb image data to svg
-    * rename data to svgdata
+
+* convert-png.sh: convert svg to png and do grayscale and negate color
 
 * listfile.py: generate the listfile for caffe
 * gen_image_data.py: use the list file to gen the image data(lmdb)

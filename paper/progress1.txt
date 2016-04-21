@@ -1,5 +1,5 @@
 
-Project: Offline mathmatical expression recognizer
+Project: Offline mathematical expression recognizer
 ------------
 
 Memmber: 
@@ -9,12 +9,12 @@ Memmber:
 
 DATA:
 
-1. We find three types of data: numbers, English letters and mathmatical symbols.
+1. We find three types of data: numbers, English letters and mathematical symbols.
     * for numbers, we use mnist data:
         * Mnist data can be download directly from the website without polishing too much.
     * for English letters, we find Chars74K(English Hand writting) data:
         * We have not work on this data yet.
-    * For mathmatical symbols, we use detexify data:
+    * For mathematical symbols, we use detexify data:
         * We made serveral scripts to transform detexify data to fit caffe.
         * convert stroke(svg) to png; we made the stroke bold which turned out a better result
         * composited the color of the image

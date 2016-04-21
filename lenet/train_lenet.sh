@@ -15,9 +15,9 @@ do
 			MODEL="$2"
 			shift # past argument
 			;;
-		*)
+		-h|*)
 			# unknown option
-			echo error augument
+			echo USAGE: -s | -m
 			exit
 			;;
 	esac
@@ -25,9 +25,11 @@ do
 done
 
 if [ -z "$MODEL" ]; then
-	MODEL=${CURDIR}/lenet_original.caffemodel
+	#MODEL=${CURDIR}/lenet_original.caffemodel
+	MODEL_PARA=
 else
 	MODEL=`realpath $MODEL`
+	MODEL_PARA="--weights=$MODEL"
 fi
 
 if [ ! -z "$SNAP" ]; then
@@ -40,7 +42,7 @@ echo Using model file $MODEL
 
 pushd ../caffe > /dev/null
 
-optirun ./build/tools/caffe train --solver=${CURDIR}/lenet_solver.prototxt --weights=$MODEL ${SNAPOPT}
+optirun ./build/tools/caffe train --solver=${CURDIR}/lenet_solver.prototxt ${MODEL_PARA} ${SNAPOPT}
 #echo optirun ./build/tools/caffe train --solver=${CURDIR}/lenet_solver.prototxt --model=$MODEL ${SNAPOPT}
 
 popd
