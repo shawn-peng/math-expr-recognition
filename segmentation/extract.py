@@ -59,7 +59,7 @@ def extract(image_name="../formula/euler.png"):
 
 if __name__ == "__main__":
     # dome some test here 
-    image_name = "../formula/handwrite.png"
+    image_name = "../formula/euler.png"
     pil_image = Image.open(image_name).convert('RGB')
     result = extract(image_name=image_name)
     for image in result:
@@ -75,4 +75,5 @@ if __name__ == "__main__":
         # dr.rectangle([(image.left, image.top), (image.right, image.bottom)], outline="green")
 
     pil_image.show()
+    pil_image.save("seg.png")
 
