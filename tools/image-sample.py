@@ -50,10 +50,21 @@ for folder in os.listdir(data_path):
             continue
         # shutil.copyfile(data_folder + "/" + test_files[i], _file)
         orgfile = data_folder + "/" + test_files[i]
-		img = Image.open(orgfile)
-		img = trim(img)
-		img.save(_file)
-		quit()
+        img = Image.open(orgfile)
+        img = trim(img)
+        
+        old_size = im.size
+
+        a = max(old_size)
+        new_size = (a+30, a+30)
+
+        new_im = Image.new("L", new_size)   ## luckily, this is already black!
+        new_im.paste(im, ((new_size[0]-old_size[0])/2,
+            (new_size[1]-old_size[1])/2))
+        new_im.show()
+
+        img.save(_file)
+        quit()
 
     n = 1000
     flen = len(train_files)
@@ -70,7 +81,7 @@ for folder in os.listdir(data_path):
     if not os.path.isdir(train_folder):
         os.makedirs(train_folder)
 
-	# print n/10
+    # print n/10
     # for i in range(n/10):
     #     t = random.randint(0,flen-1)
     #     # print "test t: %s"%t
