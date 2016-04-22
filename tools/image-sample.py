@@ -17,42 +17,55 @@ for folder in os.listdir(data_path):
         continue
 
     files = os.listdir(data_folder)
-    # random.shuffle(files)
+    random.shuffle(files)
+    test_folder = test_path + "/" + folder
+    train_folder = train_path + "/" + folder
+
+    test_files = files[:10]
+    train_files = files[10:]
+
+    if not os.path.isdir(test_folder):
+        os.makedirs(test_folder)
+
+    for i in range(10):
+        _file = test_folder + "/" + str(i) + "_" + test_files[i]
+        if os.path.isfile(_file):
+            continue
+        shutil.copyfile(data_folder + "/" + test_files[i], 
+                        _file)
 
     n = 1000
-    flen = len(files)
+    flen = len(train_files)
     print "flen: %s"%flen
     # print(files[all_ind])
     # exit()
 
 
-    test_folder = test_path + "/" + folder
-    train_folder = train_path + "/" + folder
+    
 
 
-    if not os.path.isdir(test_folder):
-        os.makedirs(test_folder)
+    
 
     if not os.path.isdir(train_folder):
         os.makedirs(train_folder)
 
-	print n/10
-    for i in range(n/10):
-        t = random.randint(0,flen-1)
-        # print "test t: %s"%t
-        _file = test_folder + "/" + str(i) + "_" + files[t]
-        if os.path.isfile(_file):
-            continue
-        shutil.copyfile(data_folder + "/" + files[t], 
-                        _file)
+	# print n/10
+    # for i in range(n/10):
+    #     t = random.randint(0,flen-1)
+    #     # print "test t: %s"%t
+    #     _file = test_folder + "/" + str(i) + "_" + files[t]
+    #     if os.path.isfile(_file):
+    #         continue
+    #     shutil.copyfile(data_folder + "/" + files[t], 
+    #                     _file)
 
     for i in range(n):
         t = random.randint(0,flen-1)
         # print "train t: %s"%t
-        _file = train_folder + "/" + str(i) + "_" + files[t]
+        _file = train_folder + "/" + str(i) + "_" + train_files[t]
         if os.path.isfile(_file):
             continue
-        shutil.copyfile(data_folder + "/" + files[t], 
+        shutil.copyfile(data_folder + "/" + train_files[t], 
                         _file)
 
 
