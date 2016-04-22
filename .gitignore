@@ -40,3 +40,4 @@ tools/config.pyc
 
 *.pyc
 snapshot/
+*.swp
