@@ -2,7 +2,7 @@
 import pprint; pp = pprint.PrettyPrinter(indent=4)
 from operator import itemgetter
 
-from PIL import Image
+from PIL import Image, ImageDraw
 import numpy as np
 from scipy import ndimage, misc
 
@@ -23,7 +23,7 @@ def average_color(pil_image, datalist):
     pil_image = pil_image.convert('L')
     return sum([pil_image.getpixel(p) for p in datalist]) / float((len(datalist)))
 
-def extract(image_name="../formula/a+b.png"):
+def extract(image_name="../formula/euler.png"):
     datalist = segment(image_name, 0.114, 300, 200).values()
     original_image = Image.open(image_name)
 
@@ -59,6 +59,20 @@ def extract(image_name="../formula/a+b.png"):
 
 if __name__ == "__main__":
     # dome some test here 
-    extract()
+    image_name = "../formula/handwrite.png"
+    pil_image = Image.open(image_name).convert('RGB')
+    result = extract(image_name=image_name)
+    for image in result:
+        dr = ImageDraw.Draw(pil_image)
 
+        # print (image.left, image.top), (image.right, image.bottom)
+        width = 4
+        dr.line((image.left, image.top, image.right, image.top), fill="green", width=width)
+        dr.line((image.left, image.top, image.left, image.bottom), fill="green", width=width)
+        dr.line((image.right, image.bottom, image.right, image.top), fill="green", width=width)
+        dr.line((image.right, image.bottom, image.left, image.bottom), fill="green", width=width)
+
+        # dr.rectangle([(image.left, image.top), (image.right, image.bottom)], outline="green")
+
+    pil_image.show()
 
