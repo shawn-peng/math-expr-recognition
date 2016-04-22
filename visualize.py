@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 from tools.config import *
 
-def vis_square(data):
+def vis_square(data, name=""):
     """Take an array of shape (n, height, width) or (n, height, width, 3)
        and visualize each (height, width) thing in a grid of size approx. sqrt(n) by sqrt(n)"""
     
@@ -33,10 +33,10 @@ def vis_square(data):
     # plt.gray()
     print "data.shape:", data.shape
     im = Image.fromarray(data.reshape(data.shape[0],data.shape[1])*255)
-    im = im.resize((1024, 1024))
+    im = im.resize((1024, 1024), Image.BILINEAR)
     im.show()
 
-    # misc.imsave("test.png",data.reshape(30,30)*255)
+    misc.imsave(name,im)
 
 
 
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     transformer.set_raw_scale('data', 1/255.0)
     net.blobs['data'].reshape(1,1,28,28)
 
-    im = Image.open("image/test1/latex2e-OT1-_alpha/1006.png")
+    im = Image.open("tools/test/Sigma/18_995.png")
     ## http://stackoverflow.com/a/11143078
     old_size = im.size
 
@@ -80,8 +80,9 @@ if __name__ == "__main__":
     #compute
     out = net.forward()
     # print "net.params['conv1']:", net.params['conv1']
-    filters = net.params['conv2'][0].data
-    print "filters.shape: ", filters.shape
+    filters = net.params['conv1'][0].data
+    print "net.params['conv1'][0].data.shape: ", net.params['conv1'][0].data.shape
+    print "net.params['conv2'][0].data.shape: ", net.params['conv2'][0].data.shape
     print "filters.transpose(0, 2, 3, 1).shape: ", filters.transpose(0, 2, 3, 1).shape
 
     # for layer_name, blob in net.blobs.iteritems():
@@ -89,7 +90,11 @@ if __name__ == "__main__":
 
     for layer_name, param in net.params.iteritems():
         print layer_name + '\t' + str(param[0].data.shape), str(param[1].data.shape)
-    vis_square(filters.transpose(0, 2, 3, 1))
+    vis_square(net.blobs['conv1'].data[0, :36], name="test1.png")
+    vis_square(net.blobs['conv2'].data[0, :36], name="test2.png")
+    vis_square(net.params['conv1'][0].data.transpose(0, 2, 3, 1), name="test3.png")
+    # feat = net.blobs['conv2'].data[0, :36]
+    # vis_square(feat)
 
 
 
