@@ -51,6 +51,7 @@ if __name__ == "__main__":
     net.blobs['data'].reshape(1,1,28,28)
 
     im = Image.open("tools/test/Sigma/18_995.png")
+    # im = Image.open("./formula/partial.png")
     ## http://stackoverflow.com/a/11143078
     old_size = im.size
 

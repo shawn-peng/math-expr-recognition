@@ -4,6 +4,7 @@ from operator import itemgetter
 
 from PIL import Image
 import numpy as np
+from scipy import ndimage, misc
 
 from segmentation import segment
 from model import ImageSymbol
@@ -23,8 +24,14 @@ def average_color(pil_image, datalist):
     return sum([pil_image.getpixel(p) for p in datalist]) / float((len(datalist)))
 
 def extract(image_name="../formula/zeta.png"):
-    datalist = segment(image_name, 0.114, 300, 200).values()
+    datalist = segment(image_name, 0.99, 300, 10).values()
     original_image = Image.open(image_name)
+
+    print(original_image.size)
+    # original_image = ndimage.grey_dilation(original_image, size=(2,2))
+    # print(original_image.shape)
+    # original_image = Image.fromarray(original_image * 255)
+    original_image.show()
 
     i = 0
     result = []
@@ -43,6 +50,7 @@ def extract(image_name="../formula/zeta.png"):
 
         if(average_color(original_image, pointlist) < 100):
             continue
+        print(average_color(original_image, pointlist))
         i += 1
 
         result.append(img_sym)

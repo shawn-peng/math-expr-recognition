@@ -2,6 +2,7 @@ import os
 import random
 import shutil
 
+from PIL import Image, ImageOps, ImageChops
 # import numpy as np
 
 cur_path = os.getcwd()
@@ -9,6 +10,22 @@ cur_path = os.getcwd()
 data_path = cur_path + "/data"
 test_path = cur_path + "/test"
 train_path = cur_path + "/train"
+
+def find_sym_box(img):
+    n, m = img.size
+    for i in range(n):
+        for j in range(m):
+            pass
+
+
+def trim(im):
+    bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
+    diff = ImageChops.difference(im, bg)
+    diff = ImageChops.add(diff, diff, 2.0, -100)
+    bbox = diff.getbbox()
+    if bbox:
+        return im.crop(bbox)
+
 
 for folder in os.listdir(data_path):
     data_folder = data_path + "/" + folder
@@ -31,8 +48,12 @@ for folder in os.listdir(data_path):
         _file = test_folder + "/" + str(i) + "_" + test_files[i]
         if os.path.isfile(_file):
             continue
-        shutil.copyfile(data_folder + "/" + test_files[i], 
-                        _file)
+        # shutil.copyfile(data_folder + "/" + test_files[i], _file)
+        orgfile = data_folder + "/" + test_files[i]
+		img = Image.open(orgfile)
+		img = trim(img)
+		img.save(_file)
+		quit()
 
     n = 1000
     flen = len(train_files)
