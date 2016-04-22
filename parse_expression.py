@@ -101,7 +101,7 @@ def fomula_decoder(image_path, list_dict=LABEL_DICT):
     return image_symbol_list
 
 if __name__ == "__main__":
-    results = fomula_decoder("./formula/partial.png")
+    results = fomula_decoder("./formula/euler.png")
     results.sort(key=lambda x: x.left)
     for result in results:
         print result

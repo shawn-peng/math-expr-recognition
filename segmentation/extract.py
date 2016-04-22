@@ -23,8 +23,8 @@ def average_color(pil_image, datalist):
     pil_image = pil_image.convert('L')
     return sum([pil_image.getpixel(p) for p in datalist]) / float((len(datalist)))
 
-def extract(image_name="../formula/zeta.png"):
-    datalist = segment(image_name, 0.99, 300, 10).values()
+def extract(image_name="../formula/a+b.png"):
+    datalist = segment(image_name, 0.114, 300, 200).values()
     original_image = Image.open(image_name)
 
     print(original_image.size)

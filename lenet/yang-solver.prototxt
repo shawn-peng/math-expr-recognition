@@ -7,7 +7,7 @@ test_iter: 100
 # Carry out testing every 500 training iterations.
 test_interval: 500
 # The base learning rate, momentum and the weight decay of the network.
-base_lr: 0.00023
+base_lr: 0.000053
 momentum: 0.9
 weight_decay: 0.00028
 # The learning rate policy
@@ -17,7 +17,7 @@ power: 0.75
 # Display every 100 iterations
 display: 1000
 # The maximum number of iterations
-max_iter: 60000
+max_iter: 100000
 # snapshot intermediate results
 snapshot: 5000
 snapshot_prefix: "/home/yang/workspace/grad/zhang505-yisupeng-final/snapshot/"
