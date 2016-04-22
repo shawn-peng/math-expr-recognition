@@ -51,20 +51,23 @@ for folder in os.listdir(data_path):
         # shutil.copyfile(data_folder + "/" + test_files[i], _file)
         orgfile = data_folder + "/" + test_files[i]
         img = Image.open(orgfile)
+        # print orgfile
         img = trim(img)
-        
-        old_size = im.size
+        if img is None:
+            print orgfile
+            continue
+
+        old_size = img.size
 
         a = max(old_size)
         new_size = (a+30, a+30)
 
         new_im = Image.new("L", new_size)   ## luckily, this is already black!
-        new_im.paste(im, ((new_size[0]-old_size[0])/2,
+        new_im.paste(img, ((new_size[0]-old_size[0])/2,
             (new_size[1]-old_size[1])/2))
-        new_im.show()
+        # new_im.show()
 
-        img.save(_file)
-        quit()
+        new_im.save(_file)
 
     n = 1000
     flen = len(train_files)
@@ -97,8 +100,26 @@ for folder in os.listdir(data_path):
         _file = train_folder + "/" + str(i) + "_" + train_files[t]
         if os.path.isfile(_file):
             continue
-        shutil.copyfile(data_folder + "/" + train_files[t], 
-                        _file)
+        # shutil.copyfile(data_folder + "/" + test_files[i], _file)
+        orgfile = data_folder + "/" + train_files[t]
+        img = Image.open(orgfile)
+        # print orgfile
+        img = trim(img)
+        if img is None:
+            print orgfile
+            continue
+
+        old_size = img.size
+
+        a = max(old_size)
+        new_size = (a+30, a+30)
+
+        new_im = Image.new("L", new_size)   ## luckily, this is already black!
+        new_im.paste(img, ((new_size[0]-old_size[0])/2,
+            (new_size[1]-old_size[1])/2))
+        # new_im.show()
+
+        new_im.save(_file)
 
 
 
