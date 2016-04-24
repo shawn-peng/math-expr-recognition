@@ -20,10 +20,7 @@ using namespace std;
 
 using namespace boost::python;
 
-void get_image(string filename)
-{
-
-}
+// THE CODE BELOW THIS POINT WAS TAKEN FROM opencv-wrapper-egbis
 
 image<rgb>* convertMatToNativeImage(const cv::Mat& input)
 {
@@ -46,6 +43,7 @@ image<rgb>* convertMatToNativeImage(const cv::Mat& input)
 	return im;
 }
 
+// END CODE FROM opencv-wrapper-egbis
 
 dict segment(const string &filename, float sigma, float c, int min_size)
 {
@@ -76,7 +74,6 @@ dict segment(const string &filename, float sigma, float c, int min_size)
 
 char const * print_str(const string &str)
 {
-	//printf(str.c_str());
 	return str.c_str();
 }
 
@@ -86,12 +83,5 @@ BOOST_PYTHON_MODULE(segmentation)
     def("print_str", print_str);
     def("segment", segment);
 }
-
-
-//BOOST_PYTHON_MODULE(print_str)
-//{
-//    using namespace boost::python;
-//    def("print_str", print_str);
-//}
 
 
