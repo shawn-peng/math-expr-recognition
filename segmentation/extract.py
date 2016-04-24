@@ -24,8 +24,12 @@ def average_color(pil_image, datalist):
     return sum([pil_image.getpixel(p) for p in datalist]) / float((len(datalist)))
 
 def extract(image_name="../formula/euler.png"):
-    datalist = segment(image_name, 0.114, 300, 200).values()
+    datalist = segment(image_name, 0.0114, 300, 200).values()
     original_image = Image.open(image_name)
+
+    print original_image.getextrema()[1]
+    threshold = original_image.getextrema()[1]*0.28
+    original_image = original_image.point(lambda p: p > threshold and p)  
 
     print(original_image.size)
     # original_image = ndimage.grey_dilation(original_image, size=(2,2))
@@ -48,7 +52,7 @@ def extract(image_name="../formula/euler.png"):
                                         left=min_x, right=max_x, 
                                         top=min_y, bottom=max_y)
 
-        if(average_color(original_image, pointlist) < 100):
+        if(average_color(original_image, pointlist) < 50):
             continue
         print(average_color(original_image, pointlist))
         i += 1
@@ -59,8 +63,11 @@ def extract(image_name="../formula/euler.png"):
 
 if __name__ == "__main__":
     # dome some test here 
-    image_name = "../formula/euler.png"
+    image_name = "../formula/hand-euler.jpg"
     pil_image = Image.open(image_name).convert('RGB')
+    print pil_image.getextrema()[1][1]
+    threshold = pil_image.getextrema()[1][1]*0.28
+    pil_image = pil_image.point(lambda p: p > threshold and 255)
     result = extract(image_name=image_name)
     for image in result:
         dr = ImageDraw.Draw(pil_image)
