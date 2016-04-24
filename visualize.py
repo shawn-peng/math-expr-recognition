@@ -50,7 +50,7 @@ if __name__ == "__main__":
     transformer.set_raw_scale('data', 1/255.0)
     net.blobs['data'].reshape(1,1,28,28)
 
-    im = Image.open("tools/test/Sigma/18_995.png")
+    im = Image.open("tools/data/Sigma/995.png")
     # im = Image.open("./formula/partial.png")
     ## http://stackoverflow.com/a/11143078
     old_size = im.size
@@ -91,9 +91,10 @@ if __name__ == "__main__":
 
     for layer_name, param in net.params.iteritems():
         print layer_name + '\t' + str(param[0].data.shape), str(param[1].data.shape)
-    vis_square(net.blobs['conv1'].data[0, :36], name="test1.png")
-    vis_square(net.blobs['conv2'].data[0, :36], name="test2.png")
-    vis_square(net.params['conv1'][0].data.transpose(0, 2, 3, 1), name="test3.png")
+    vis_square(net.blobs['conv1'].data[0, :30], name="test1.png")
+    vis_square(net.blobs['conv2'].data[0, :30], name="test2.png")
+    vis_square(net.blobs['conv3'].data[0, :50], name="test3.png")
+    vis_square(net.params['conv1'][0].data.transpose(0, 2, 3, 1), name="test-weight.png")
     # feat = net.blobs['conv2'].data[0, :36]
     # vis_square(feat)
 
