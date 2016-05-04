@@ -29,7 +29,7 @@ if (process.argv.length >= 3){
     key = process.argv[2]
 }
 
-var folder_path = "./data/" + key + "/"
+var folder_path = "./svgdata/" + key + "/"
 var host = "http://127.0.0.1:5984/"
 var database = "b657"
 var url = database + "/_design/tools/_view/by_id?key=%22" + key + "%22&reduce=false&include_docs=true"
