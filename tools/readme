@@ -8,9 +8,9 @@ Main chain:
 
 * convert-png.sh: convert svg to png and do grayscale and negate color
 
-* listfile.py: generate the listfile for caffe
-* gen_image_data.py: use the list file to gen the image data(lmdb)
-
 Helper tools:
 image-sample.py: pick up some images to another folder
+
+* listfile.py: generate the listfile for caffe
+* gen_image_data.py: use the list file to gen the image data(lmdb)
 
